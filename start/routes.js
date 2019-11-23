@@ -28,3 +28,11 @@ Route.post('/api/message/send', 'MessageController.sendMessage')
 Route.get('/', () => {
   return { greeting: 'Hello world in JSON' }
 })
+
+Route.group(()=> {
+  Route.get('ads', 'AdController.index')
+  Route.get('ads/:id', 'AdController.show')
+  Route.post('ad', 'AdController.store')
+  Route.put('ad/:id', 'AdController.update')
+  Route.delete('ad/:id', 'AdController.delete')
+}).prefix('api')

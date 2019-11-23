@@ -16,7 +16,7 @@ module.exports = {
   | interacting with SQL databases.
   |
   */
-  connection: Env.get('DB_CONNECTION', 'sqlite'),
+  connection: Env.get('DB_CONNECTION', 'mongodb'),
 
   /*
   |--------------------------------------------------------------------------
@@ -94,7 +94,7 @@ module.exports = {
       port: Env.get('DB_PORT', 27017),
       username: Env.get('DB_USER', 'admin'),
       password: Env.get('DB_PASSWORD', ''),
-      database: Env.get('DB_DATABASE', 'adonis'),
+      database: Env.get('DB_DATABASE', 'fastedb'),
       options: {
         // replicaSet: Env.get('DB_REPLICA_SET', '')
         // ssl: Env.get('DB_SSL, '')
