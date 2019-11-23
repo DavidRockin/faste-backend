@@ -19,6 +19,19 @@ class AuthController {
     }
   }
 
+  async getUserInfo({ request, response, auth }) {
+    response.implicitEnd = false
+
+    try {
+      return await auth.getUser()
+    } catch (e) {
+      console.log(e)
+      return response.send({
+        error: e
+      })
+    }
+  }
+
   async register({ request, response }) {
     response.implicitEnd = false
 

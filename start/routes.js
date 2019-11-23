@@ -19,6 +19,8 @@ const Route = use('Route')
 Route.post('/api/login', 'AuthController.login')
 Route.post('/api/register', 'AuthController.register')
 
+Route.get('/api/user', 'AuthController.getUserInfo')
+
 Route.get('/api/listing', 'ListingController.getListings')
 Route.post('/api/listing/create', 'ListingController.createListing')
 
