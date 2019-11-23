@@ -11,7 +11,7 @@ class AdController {
     }
 
     async show({params, response}) {
-        const ad = await Ad.find(params.id);
+        const ad = await Ad.find(params.adId);
         return response.send({
             error: false,
             ad
@@ -29,7 +29,7 @@ class AdController {
 
     async update({ params, request, response }) {
         const adInfo = request.all()
-        const ad = await Ad.find(params.id);
+        const ad = await Ad.find(params.adId);
         ad.merge(adInfo);
         await ad.save();
         return response.status(200).send({

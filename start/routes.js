@@ -22,16 +22,18 @@ Route.post('/api/register', 'AuthController.register')
 Route.get('/api/listing', 'ListingController.getListings')
 Route.post('/api/listing/create', 'ListingController.createListing')
 
-Route.get('/api/messages', 'MessageController.retrieveMessages')
-Route.post('/api/message/send', 'MessageController.sendMessage')
-
 Route.get('/', () => {
   return { greeting: 'Hello world in JSON' }
 })
 
 Route.group(()=> {
-  Route.get('ads', 'AdController.index')
-  Route.get('ads/:id', 'AdController.show')
-  Route.post('ads', 'AdController.store')
-  Route.put('ads/:id', 'AdController.update')
-}).prefix('api')
+  Route.get('', 'AdController.index')
+  Route.get('/:adId', 'AdController.show')
+  Route.post('', 'AdController.store')
+  Route.put('/:adId', 'AdController.update')
+}).prefix('api/ads')
+
+Route.group(()=> {
+  Route.get('', 'MessageController.retrieveMessages')
+  Route.post('', 'MessageController.sendMessage')
+}).prefix('api/users/:userId/messages')
