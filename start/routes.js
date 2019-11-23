@@ -19,6 +19,11 @@ const Route = use('Route')
 Route.post('/api/login', 'AuthController.login')
 Route.post('/api/register', 'AuthController.register')
 
+Route.get('/api/listing', 'ListingController.getListings')
+Route.post('/api/listing/create', 'ListingController.createListing')
+
+Route.get('/api/messages', 'MessageController.retrieveMessages')
+Route.post('/api/message/send', 'MessageController.sendMessage')
 
 Route.get('/', () => {
   return { greeting: 'Hello world in JSON' }
