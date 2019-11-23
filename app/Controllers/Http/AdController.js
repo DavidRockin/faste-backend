@@ -3,13 +3,41 @@
 const Ad = use('App/Models/Ad')
 class AdController {
     async index({response}) {
-        let ads = await Ad.all();
-        response.implicitEnd = false;
+        const ads = await Ad.all();
         return response.send({
             error: false,
             ads
         });
     }
+
+    async show({params, response}) {
+        const ad = await Ad.find(params.id);
+        return response.send({
+            error: false,
+            ad
+        });
+    }
+
+    async store({ request, response }) {
+        const adInfo = request.all()
+        const ad = await Ad.create(adInfo);
+        return response.status(201).send({
+            error: false,
+            ad
+        });
+    }
+
+    async update({ params, request, response }) {
+        const adInfo = request.all()
+        const ad = await Ad.find(params.id);
+        ad.merge(adInfo);
+        await ad.save();
+        return response.status(200).send({
+            error: false,
+            ad
+        });
+    }
+
 }
 
 module.exports = AdController

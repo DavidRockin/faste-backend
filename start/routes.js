@@ -32,7 +32,6 @@ Route.get('/', () => {
 Route.group(()=> {
   Route.get('ads', 'AdController.index')
   Route.get('ads/:id', 'AdController.show')
-  Route.post('ad', 'AdController.store')
-  Route.put('ad/:id', 'AdController.update')
-  Route.delete('ad/:id', 'AdController.delete')
+  Route.post('ads', 'AdController.store')
+  Route.put('ads/:id', 'AdController.update')
 }).prefix('api')
