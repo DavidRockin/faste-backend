@@ -3,12 +3,20 @@
 const User = use('App/Models/User')
 
 class AuthController {
-  login({ request, response}) {
+
+  async login({ request, response, auth }) {
     response.implicitEnd = false
-    return response.send({
-      error: false,
-      message: `....`
-    })
+
+    try {
+      const { email, password } = request.all()
+      const token = await auth.attempt(email, password)
+      return response.send({ token })
+    } catch (e) {
+      console.log(e)
+      return response.send({
+        error: e
+      })
+    }
   }
 
   async register({ request, response }) {
@@ -25,6 +33,7 @@ class AuthController {
       })
     }
   }
+
 }
 
 module.exports = AuthController
