@@ -239,5 +239,13 @@ module.exports = {
     sameSite: false,
     path: '/',
     maxAge: 7200
+  },
+
+  nutritionixApi: {
+    url: 'https://trackapi.nutritionix.com/v2',
+    headers: {
+      'x-app-id': Env.getOrFail('NUTRITIONIX_APP_ID'),
+      'x-app-key': Env.getOrFail('NUTRITIONIX_API_KEY'),
+    } 
   }
 }

@@ -37,3 +37,8 @@ Route.group(()=> {
   Route.get('', 'MessageController.retrieveMessages')
   Route.post('', 'MessageController.sendMessage')
 }).prefix('api/users/:userId/messages')
+
+Route.group(()=> {
+  Route.get('/search', 'FoodController.retrieveFoods')
+  Route.get('/nutrients', 'FoodController.getFoodNutrients')
+}).prefix('api/foods')
