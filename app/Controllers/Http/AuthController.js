@@ -55,7 +55,7 @@ class AuthController {
       const user = await auth.getUser()
       user.email = data.email || user.email || null
       user.name = data.name || user.name || null
-      if (data.password) user.password = data.password
+      if (data.password && data.password.trim().length !== 0) user.password = data.password
       user.telephone = data.telephone || user.telephone || null
       user.save()
       return response.send({
