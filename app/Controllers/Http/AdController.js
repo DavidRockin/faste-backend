@@ -1,6 +1,12 @@
 'use strict'
 
-const btoa = require('btoa')
+const toBase64 = file => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+});
+
 
 const Ad = use('App/Models/Ad')
 class AdController {
@@ -25,7 +31,7 @@ class AdController {
         const adInfo = { ...request.all(), userId: user._id, userEmail: user.email, userName: user.name, userTel: user.telephone }
         
         if (adInfo.file) {
-            adInfo.file = `data:image/png;base64,` + btoa(adInfo.file)
+            adInfo.file = await toBase64(adInfo.file)
         }
         
         const ad = await Ad.create(adInfo);
