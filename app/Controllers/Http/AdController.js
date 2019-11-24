@@ -1,5 +1,7 @@
 'use strict'
 
+const atob = require('atob')
+
 const Ad = use('App/Models/Ad')
 class AdController {
     async index({response}) {
