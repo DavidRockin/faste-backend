@@ -47,6 +47,29 @@ class AuthController {
     }
   }
 
+  async updateUserInfo({ request, response, auth }) {
+    response.implicitEnd = false
+
+    try {
+      const data = request.all()
+      const user = await auth.getUser()
+      user.email = data.email || user.email || null
+      user.name = data.name || user.name || null
+      if (data.password) user.password = data.password
+      user.telephone = data.telephone || user.telephone || null
+      user.save()
+      return response.send({
+        ...user,
+        success: true
+      })
+    } catch (e) {
+      console.log(e)
+      return response.send({
+        error: e
+      })
+    }
+  }
+
 }
 
 module.exports = AuthController
