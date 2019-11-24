@@ -1,6 +1,6 @@
 'use strict'
 
-const atob = require('atob')
+const btoa = require('btoa')
 
 const Ad = use('App/Models/Ad')
 class AdController {
@@ -25,7 +25,7 @@ class AdController {
         const adInfo = { ...request.all(), userId: user._id, userEmail: user.email, userName: user.name, userTel: user.telephone }
         
         if (adInfo.file) {
-            adInfo.file = `data:image/png;base64,` + atob(adInfo.file)
+            adInfo.file = `data:image/png;base64,` + btoa(adInfo.file)
         }
         
         const ad = await Ad.create(adInfo);
