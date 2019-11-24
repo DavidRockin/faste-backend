@@ -21,6 +21,11 @@ class AdController {
     async store({ request, response, auth }) {
         const user = await auth.getUser()
         const adInfo = { ...request.all(), userId: user._id, userEmail: user.email, userName: user.name, userTel: user.telephone }
+        
+        if (adInfo.file) {
+            adInfo.file = `data:image/png;base64,` + atob(adInfo.file)
+        }
+        
         const ad = await Ad.create(adInfo);
         return response.status(201).send({
             error: false,
