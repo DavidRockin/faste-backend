@@ -18,8 +18,9 @@ class AdController {
         });
     }
 
-    async store({ request, response }) {
-        const adInfo = request.all()
+    async store({ request, response, auth }) {
+        const user = await auth.getUser()
+        const adInfo = { ...request.all(), userId: user._id, userEmail: user.email }
         const ad = await Ad.create(adInfo);
         return response.status(201).send({
             error: false,
