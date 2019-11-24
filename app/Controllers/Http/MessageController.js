@@ -1,6 +1,7 @@
 'use strict'
 
 const Message = use('App/Models/Message')
+const User = use('App/Models/User')
 
 class MessageController {
   /**
@@ -11,6 +12,10 @@ class MessageController {
     const messageInfo = await request.all();
     messageInfo['senderId'] = params.userId;
     messageInfo['unread'] = true;
+    let sender = await User.find(messageInfo['senderId']);
+    let receiver = await User.find(messageInfo['receiverId']);
+    messageInfo['senderName'] = sender.name;
+    messageInfo['receiverName'] = receiver.name;
     const message = await Message.create(messageInfo);
     return response.send({
       error: false,
